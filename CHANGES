@@ -1,0 +1,23 @@
+0.1 first version
+0.2 corrected wrong url
+0.3 added OSX support, now supports Linux, Windows and OSX. note that for window administrative privilieges are needed
+0.4 led output support
+0.5 joystick support
+0.6 buttonbox is now an object, api change
+0.6.4 common code for buttonbox and joystick, optional port for both
+0.6.5 support for ACM chip devices (Uno)
+0.6.6 added HideStdout
+0.6.7 added BITSI extended (extended.py)
+0.6.8 detect port bug in windows, new url
+0.7.0 added waitKeys/getKeys link to waitButtons/getButtons, return psychopy style for waitButtons (None/['A'])
+0.7.2 adopted init to See "Automatic (Software) Reset" in the documentation.
+0.7.6 errors in case of id string timeout of extended are now info's, complies with faulty buttonboxes
+0.7.7 compatible with Python 3 and new style buttonbox id strings with version number
+0.7.8 bugfix in open
+0.7.9 bugfix for python3 in joystick
+0.8 fully python 3 compatible
+0.8.1 no changes
+0.8.2 bug in sendMarker/setLeds of buttonbox
+0.8.3 bug in send of extended
+0.8.4 remove debug info
+0.8.5 move to github, 2 bug in python 3

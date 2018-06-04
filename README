@@ -1,0 +1,8 @@
+# Copyright (C) 2013-2018 Wilbert van Ham, Radboud University Nijmegen
+# Distributed under the terms of the GNU General Public License (GPL).
+
+RuSocSci is a package 
+for connecting to the Radboud University Nijmegen, Faculty of Social 
+Sciences USB Buttonbox and Red Joystick in a PsychoPy-like way.
+
+Starting with version 0.8 this package is both Python 2 and Python 3 compatible.

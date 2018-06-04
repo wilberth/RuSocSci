@@ -1,0 +1,19 @@
+### help
+https://pypi.python.org/pypi/RuSocSci
+http://docs.python.org/2/distutils/packageindex.html
+http://docs.python.org/2/distutils/sourcedist.html#manifest-template
+
+### to make a new version and upload it
+#alter setup.py (increase version number)
+#alter rusocsci/__init__.py (increase version number)
+#alter CHANGES
+#alter MANIFEST if necessary
+#python setup.py sdist --formats=zip
+make
+#python setup.py sdist upload --formats=zip
+make upload
+
+### to upload docs
+epydoc rusocsci
+rm -f doc.zip; cd html; zip ../doc.zip *; cd ..
+upload it here: https://pypi.python.org/pypi?:action=pkg_edit&name=RuSocSci

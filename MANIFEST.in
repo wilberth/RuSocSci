@@ -1,0 +1,4 @@
+include CHANGES
+include component/help
+include component/rusocsciBox.py
+include component/rusocsciBox.png
