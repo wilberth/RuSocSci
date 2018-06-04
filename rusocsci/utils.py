@@ -12,8 +12,11 @@ Known issues:
 """
 import sys, serial, time, os, re, logging, struct
 if sys.platform == "win32":
-	import _winreg
-	
+	if sys.version_info >= (3, 0):
+		import winreg as _winreg
+	else:
+		import _winreg
+
 class HideStderr(object):
 	'''
 	A context manager that blocks stderr for its scope, usage::
