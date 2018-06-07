@@ -198,6 +198,15 @@ def open(port):
 	Note that port can also be a real serial port (non USB).
 	returns serial connection and id string. In Python 3 this is a string object.
 	"""
+	
+	# port must be str in Python 3, str or unicode in Python 2: convert
+	# Python2: converting to unicode is harmless, open() accepts both unicode and str
+	# Python3: converting from bytes to unicode is necessary, converting from unicode to unicode will fail
+	try:
+		port = port.decode("utf-8")
+	except:
+		pass
+
 	try:
 		device = serial.Serial(port, baudrate=115200, parity='N', timeout = 0.0)  # open serial port
 	except Exception as e:
