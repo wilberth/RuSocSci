@@ -13,7 +13,7 @@ def read(fname):
 
 setup(
 	name = "RuSocSci",
-	version = "0.8.5",
+	version = "0.8.6",
 	install_requires = "pyserial",
 	python_requires = ">=2.6",
 	author = "Wilbert van Ham",
