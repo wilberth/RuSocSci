@@ -6,6 +6,9 @@ http://docs.python.org/2/distutils/sourcedist.html#manifest-template
 ### to make a new version and upload it
 #alter setup.py (increase version number)
 #alter rusocsci/__init__.py (increase version number)
+#tag with version number
+git tag -a v0.8.5 -m ""
+git push origin --tags
 #alter CHANGES
 #alter MANIFEST if necessary
 #python setup.py sdist --formats=zip

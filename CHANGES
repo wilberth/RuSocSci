@@ -20,4 +20,4 @@
 0.8.2 bug in sendMarker/setLeds of buttonbox
 0.8.3 bug in send of extended
 0.8.4 remove debug info
-0.8.5 move to github, 2 bug in python 3
+0.8.5 move to github, 2 bugs in python 3 MS

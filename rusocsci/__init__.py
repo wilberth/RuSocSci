@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License (GPL).
 
 #version info for RuSocSci
-__version__='0.8.4'
+__version__='0.8.5'
 __license__='GNU GPLv3 (or more recent equivalent)'
 __author__='Wilbert van Ham'
 __author_email__='W.vanHam@socsci.ru.nl'
