@@ -47,6 +47,7 @@ class Buttonbox(object):
 	def __init__(self, id=0, port=None):
 		self._port = utils.getPort(id, port)
 		self._device = None
+		self._maxWait = None # overrides maxWait in waitButtons
 		if not self._port:
 			raise Exception("No USB serial device connected, could not get port name.")
 		self._device, idString = utils.open(self._port)
@@ -152,6 +153,67 @@ class Buttonbox(object):
 			return [(c, time.time() - t)]
 		else:
 			return [c] # version 0.7 change to comply with PsychoPy
+		
+	def waitButtonsHog(self, maxWait=float("inf"), buttonList=None, timeStamped=False, flush=True):
+		"""
+		Same as waitButtons(), but using processor hogging rather than an interrupt.
+		May start faster than waitButtons in MS Windows if maxWait is given.
+
+		:Parameters:
+			maxWait : any numeric value.
+				Maximum number of seconds period and which buttons to wait for. 
+				Default is float('inf') which simply waits forever.
+			buttonList:
+				List of one character strings containing the buttons to react to.
+				All other button presses will be ignored. Note that for BITSI 
+				buttonboxes the buttons are identified by capital letters upon press
+				and by lower case letters upon release.
+
+		Returns None if times out. Returns a list of one character upon succes, like 
+		the PsychoPy event module.
+		"""
+		if self._device == None:
+			raise Exception("No buttonbox connected")
+		t = time.time()
+			
+		if flush:
+			self._device.flushInput()           
+		cnt = self._device.inWaiting()
+		c = ''
+		while (maxWait > time.time() - t) and (c == ''):
+			#  The following timeout setters cause an unwanted delay
+			#if maxWait == float("inf"):
+			#             self._device.timeout = None
+			#else:
+			#             self._device.timeout = maxWait - (time.time() - t)
+			if cnt != self._device.inWaiting():
+				s = self._device.read(self._device.inWaiting())
+				s = s[cnt:len(s)]
+				cnt = self._device.inWaiting()
+				print 's == ', s, s[0]
+				i = 0
+				# get the first response after this function was called.
+				while i < len(s) and c == '':
+					if buttonList==None:
+						#if s[i] >= 'A' and s[i] <= 'Z': #only wait for keyPRESSES, not for keyRELEASES
+						c = s[i]
+					elif s[i] in buttonList:
+						c = s[i]
+						i = i + 1
+					return c
+
+		if c=='':
+			# version 0.7 addition to comply with PsychoPy
+			return None
+
+		if hasattr(timeStamped, 'timeAtLastReset'):
+			return [(c, time.time() - timeStamped.timeAtLastReset)]
+		elif timeStamped:
+			# return as a one item list to mimic getButtons behaviour
+			return [(c, time.time() - t)]
+		else:
+			return [c] # version 0.7 change to comply with PsychoPy
+
 			
 	def waitKeys(self, maxWait=float("inf"), keyList=None, timeStamped=False):
 		"""
