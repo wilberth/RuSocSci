@@ -21,3 +21,4 @@
 0.8.3 bug in send of extended
 0.8.4 remove debug info
 0.8.5 move to github, 2 bugs in python 3 MS
+0.8.6 add waitButtonsHog
