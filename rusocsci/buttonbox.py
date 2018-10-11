@@ -190,17 +190,12 @@ class Buttonbox(object):
 				s = self._device.read(self._device.inWaiting())
 				s = s[cnt:len(s)]
 				cnt = self._device.inWaiting()
-				print 's == ', s, s[0]
 				i = 0
 				# get the first response after this function was called.
 				while i < len(s) and c == '':
-					if buttonList==None:
-						#if s[i] >= 'A' and s[i] <= 'Z': #only wait for keyPRESSES, not for keyRELEASES
-						c = s[i]
-					elif s[i] in buttonList:
-						c = s[i]
-						i = i + 1
-					return c
+					if buttonList==None or s[i] in buttonList:
+						c = s[i].decode()
+						i += 1
 
 		if c=='':
 			# version 0.7 addition to comply with PsychoPy
