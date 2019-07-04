@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """RuSocSci module for the red joystick
 
-Copyright (C) 2013-2018 Wilbert van Ham, Radboud University Nijmegen
+Copyright (C) 2013-2019 Wilbert van Ham, Radboud University Nijmegen
 Distributed under the terms of the GNU General Public License (GPL) version 3 or newer.
 
 Known issues:

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """RuSocSci module for the BITSI extended buttonbox
 
-Copyright (C) 2013-2018 Wilbert van Ham, Radboud University Nijmegen
+Copyright (C) 2013-2019 Wilbert van Ham, Radboud University Nijmegen
 Distributed under the terms of the GNU General Public License (GPL) version 3 or newer.
 """
 import sys, serial, time, os, re, logging, glob
