@@ -212,14 +212,14 @@ def open(port):
 	while device is None:
 		try:
 			device = serial.Serial(port, baudrate=115200, parity='N', timeout = 0.0)  # open serial port
-   #     	except Exception as e:
-        	except serial.serialutil.SerialException as e:
+#		except Exception as e:
+		except serial.serialutil.SerialException as e:
 			if 'Device or resource busy:' in e.__str__():
 				logging.debug('Opening COM port is taking a little while, please stand by...')
-        		else:
+			else:
 				logging.error("Could not connect to serial port {}: \n{}".format(port, e))
 				return None
-        		time.sleep(1)
+		time.sleep(1)
 
 		
 	# reset connection
