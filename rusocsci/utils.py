@@ -155,6 +155,7 @@ def serialList():
 	else:
 		# /dev/serial/by-id/*FTDI* for FTDI (0403:6001) in Arduino 2009
 		# /dev/ttyACM? for Arduino Uno R3 (2341:0043) and Arduino Leonardo (2341:8036)
+		# /dev/ttyACM? for Teensy
 		try:
 			# HideStderr will fail in openSesame since it has no stderr
 			with HideStderr():
@@ -211,7 +212,7 @@ def open(port):
 
 
 	device = None
-	while device is None:
+	while True:
 		try:
 			device = serial.Serial(port, baudrate=115200, parity='N', timeout = 0.0)  # open serial port
 #		except Exception as e:
@@ -220,12 +221,14 @@ def open(port):
 				logging.debug('Opening COM port is taking a little while, please stand by...')
 			else:
 				logging.error("Could not connect to serial port {}: \n{}".format(port, e))
-				return None
+				return [None, "Could not connect to serial port"]
+		if device is not None:
+			break
 		time.sleep(1)
 
 		
 	# reset connection
-	device.flushInput()
+	device.flushInput() # race condition, must happen before device sends ID string for devices that do not reset, like Teensy
 	# The following three lines cause a reset of the Arduino. 
 	# See "Automatic (Software) Reset" in the documentation.
 	# Make sure not to send data for the first second after reset.
@@ -241,7 +244,7 @@ def open(port):
 	# read till windows newline for a maximum of 3 seconds
 	while len(bytesRead) < 2 or bytesRead[-2:] != b"\x0d\x0a": # p23
 		if time.time() > beginTime + TIMEOUT:
-			logging.info("USB serial timeout waiting for ID string")
+			logging.info("USB serial timeout waiting for ID string, got: '{}'".format(bytesRead))
 			return (device, "USB serial timeout")
 		bytesReading = device.read() # p2: <type 'str'>, p3: <class 'bytes'> (immutable)
 		bytesRead += bytesReading
