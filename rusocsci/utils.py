@@ -11,6 +11,8 @@ Known issues:
 
 """
 import sys, serial, time, os, re, logging, struct
+
+TIMEOUT = 6.0
 if sys.platform == "win32":
 	if sys.version_info >= (3, 0):
 		import winreg as _winreg
@@ -238,7 +240,7 @@ def open(port):
 	bytesRead = b"" # p23
 	# read till windows newline for a maximum of 3 seconds
 	while len(bytesRead) < 2 or bytesRead[-2:] != b"\x0d\x0a": # p23
-		if time.time() > beginTime + 3:
+		if time.time() > beginTime + TIMEOUT:
 			logging.info("USB serial timeout waiting for ID string")
 			return (device, "USB serial timeout")
 		bytesReading = device.read() # p2: <type 'str'>, p3: <class 'bytes'> (immutable)
