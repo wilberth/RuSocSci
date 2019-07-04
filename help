@@ -7,10 +7,11 @@ http://docs.python.org/2/distutils/sourcedist.html#manifest-template
 #alter setup.py (increase version number)
 #alter rusocsci/__init__.py (increase version number)
 #tag with version number
-git tag -a v0.8.5 -m ""
-git push origin --tags
 #alter CHANGES
 #alter MANIFEST if necessary
+git commit
+git tag -a v0.8.6 -m ""
+git push origin --tags
 #python setup.py sdist --formats=zip
 make
 #python setup.py sdist upload --formats=zip
