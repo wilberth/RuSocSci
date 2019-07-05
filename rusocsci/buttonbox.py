@@ -93,7 +93,8 @@ class Buttonbox(object):
 		if self._device is None:
 			raise Exception("No buttonbox connected")
 
-		self._device.timeout = 0
+		if self._device.timeout != 0:
+			self._device.timeout = 0
 		if sys.version_info >= (3, 0):
 			cList = self._device.read(1024).decode() # p23, warning utf8, expect trouble for non-ascii bytes
 			# <class 'str'>

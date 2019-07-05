@@ -22,3 +22,7 @@
 0.8.4 remove debug info
 0.8.5 move to github, 2 bugs in python 3 MS
 0.8.6 add waitButtonsHog
+0.8.7 read id string immediately after connecting for devices that do not reset (5 button buttonbox)
+      increased connect timeout to 6 s
+      do not set timeout of device if already 0s (prevent error in windows)
+      pylint code
