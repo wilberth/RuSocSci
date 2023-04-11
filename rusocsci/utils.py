@@ -251,4 +251,26 @@ def open(port):
 		
 	return (device, bytesRead[:-2].decode())
 
+def sleep(duration, singleDuration=1.0, sleepFunc=time.sleep, timeFunc=time.time, func=None):
+	"""
+	wait while doing something periodically
+	example use:
+		sleep(20) # does the same as time.sleep
+		sleep(20, func=event.clearEvents # prevents windows from detecting hang
+		sleep(20, timeFunc=time.perf_counter, func=event.clearEvents # same as above
+		sleep(20, sleepFunc=event.waitKeys, func=event.clearEvents # exit on keypress
+	"""
+	t0 = timeFunc()
+	while True:
+		t1 = timeFunc()-t0 # time since start
+		durationLeft = duration - t1 
+		if durationLeft <= singleDuration: # just the normal version
+			return sleepFunc(durationLeft)
+		else:
+			retval = sleepFunc(singleDuration)
+			if retval is not None:
+				return retval
+			if func is not None:
+				func()
+
 

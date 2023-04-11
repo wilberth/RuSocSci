@@ -2,12 +2,12 @@ build: CHANGES README MANIFEST.in setup.py
 	#rm -rf /tmp/RuSocSci
 	#mkdir /tmp/RuSocSci
 	#cp -a * /tmp/RuSocSci
-	#cd /tmp/RuSocSci; python setup.py sdist --formats=zip
-	#cd /tmp/RuSocSci; python setup.py bdist_wheel
-	python setup.py bdist_wheel
+	#cd /tmp/RuSocSci; python3 setup.py sdist --formats=zip
+	#cd /tmp/RuSocSci; python3 setup.py bdist_wheel
+	python3 setup.py bdist_wheel
 	
 upload:
-	#cd /tmp/RuSocSci; python setup.py sdist --formats=zip upload
+	#cd /tmp/RuSocSci; python3 setup.py sdist --formats=zip upload
 	#cd /tmp/RuSocSci; twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 	#cd /tmp/RuSocSci; twine upload dist/*
 	twine upload dist/*

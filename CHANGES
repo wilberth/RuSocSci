@@ -26,3 +26,5 @@
       increased connect timeout to 6 s
       do not set timeout of device if already 0s (prevent error in windows)
       pylint code
+0.9   add sleep function that prevents windows hang detect in msw with waitButtons
+0.9.1 remove buttonbox2.py
